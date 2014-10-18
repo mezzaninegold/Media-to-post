@@ -1,7 +1,6 @@
 This is a wordpress plugin.
-=============
-# Media to Post Plugin
 
+# Media to Post Plugin
 
 This plugin allows you to create post / custom posts from images uploaded to the wordpress media uploader.
 
