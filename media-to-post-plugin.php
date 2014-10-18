@@ -41,7 +41,7 @@ function create_post( $attach_ID ) {
 }
 
 
-// create custom plugin settings menu
+// create plugin settings menu
 add_action('admin_menu', 'mtp_create_menu');
 
 function mtp_create_menu() {
@@ -65,6 +65,7 @@ function mtp_settings_page() {
 <div class="wrap">
 <h2>Media To Posts</h2>
 <p> Go to the <a href="<?php echo site_url(); ?>/wp-admin/plugins.php">plugins</a> page to deactive when not in use.</p>
+<p> <a href="https://github.com/mezzaninegold/Media-to-post" target="_blank">Visit the GitHub repository for updates</a></p>
 
 <form method="post" action="options.php">
     <?php settings_fields( 'mtp-settings-group' ); ?>
