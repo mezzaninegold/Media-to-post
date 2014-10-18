@@ -2,9 +2,9 @@ This is a wordpress plugin.
 
 # Media to Post Plugin
 
-This plugin allows you to bulk create posts / custom posts from images uploaded to the wordpress media uploader.
+Allows bulk uploading of images from the media uploader to be turned into posts / custom posts with featured images.
 
-New posts are created using the file name of the image as the post title and setting the image as the featured image.
+New posts are created using the file name of the image as the post title.
 
 
 
