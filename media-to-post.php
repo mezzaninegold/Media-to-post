@@ -6,11 +6,11 @@ Description: Allows bulk uploading of images to be turned into posts with featur
 Version: 2.1
 Author: Mezzanine gold
 Author URI: http://mezzaninegold.com
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
-
 add_action('add_attachment', 'create_post');
-
 
 function create_post( $attach_ID ) {
 
@@ -41,14 +41,20 @@ function create_post( $attach_ID ) {
 }
 
 
+function bulk_create_post(){
+  add_action('add_attachment', 'create_post');
+}
+
+
 // create plugin settings menu
 add_action('admin_menu', 'mtp_create_menu');
 
 function mtp_create_menu() {
 
     //create new top-level menu
-    add_menu_page('MTP Plugin Settings', 'MTP', 'administrator', __FILE__, 'mtp_settings_page','dashicons-images-alt');
-
+    global $my_admin_page;
+    $my_admin_page = add_menu_page('MTP Plugin Settings', 'MTP', 'administrator', __FILE__, 'mtp_settings_page','dashicons-images-alt');
+    add_action('load-'.$my_admin_page, 'bulk_create_post');
     //call register settings function
     add_action( 'admin_init', 'register_mysettings' );
 }
@@ -61,8 +67,15 @@ function register_mysettings() {
 }
 
 function mtp_settings_page() {
+
+
 ?>
+
+
+
 <div class="wrap">
+
+
 <h2>Media To Posts</h2>
 <p> Go to the <a href="<?php echo site_url(); ?>/wp-admin/plugins.php">plugins</a> page to deactive when not in use.</p>
 <p> <a href="https://github.com/mezzaninegold/Media-to-post" target="_blank">Visit the GitHub repository for updates</a></p>
@@ -121,5 +134,27 @@ function mtp_settings_page() {
     <?php submit_button(); ?>
 
 </form>
+<?php
+
+wp_enqueue_script('plupload-handlers');
+?>
+
+<?php
+$form_class = 'media-upload-form type-form validate';
+if ( get_user_setting('uploader') || isset( $_GET['browser-uploader'] ) )
+$form_class .= ' html-uploader';
+?>
+<div class="wrap">
+<h2><?php echo esc_html( $title ); ?></h2>
+<form enctype="multipart/form-data" method="post" action="<?php echo admin_url('media-new.php'); ?>" class="<?php echo esc_attr( $form_class ); ?>" id="file-form">
+<?php media_upload_form(); ?>
+<script type="text/javascript">
+var post_id = <?php echo $post_id; ?>, shortform = 3;
+</script>
+<input type="hidden" name="post_id" id="post_id" value="<?php echo $post_id; ?>" />
+<?php wp_nonce_field('media-form'); ?>
+<div id="media-items" class="hide-if-no-js"></div>
+</form>
+</div>
 </div>
 <?php } ?>
