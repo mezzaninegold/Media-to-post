@@ -14,7 +14,6 @@ The options page allows you to switch between post types and select categories t
 
 ## Issues
 
-* Subcategories not working in category selection dropdown.
 Currently the plugin needs to be deactivated when not bulk uploading as all images uploaded through wordpress will create new posts.
 
 Contributions welcome.

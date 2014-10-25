@@ -116,17 +116,10 @@ function mtp_settings_page() {
             <th scope="row">Select the category</th>   
             <td>
                 <?php 
-                $args = array( 'hide_empty' => 0,'hierarchical' => 0 ); 
-                $categories = get_categories($args); ?>
-                <select name="new_media_cat">
-                    <option style="font-weight:bold;" value="<?php echo get_option('new_media_cat'); ?>">
-                        <?php $cat=get_option('new_media_cat'); $yourcat = get_category($cat);
-                        if ($yourcat) { echo $yourcat->name; } ?>
-                    </option>
-                    <?php foreach ($categories as $category) { ?>
-                        <option value="<?php echo $category->cat_ID ?>"><?php echo $category->name ?></option>
-                    <? } ?>
-                </select>
+                $currentCat = get_option('new_media_cat');
+                wp_dropdown_categories(array('hide_empty' => 0, 'name' => 'new_media_cat', 'orderby' => 'name', 'selected' => $currentCat, 'hierarchical' => true, 'show_option_none' => __('None')));
+                ?>
+
             </td>
         </tr>
     </table>
