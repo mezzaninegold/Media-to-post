@@ -116,7 +116,7 @@ function mtp_settings_page() {
             <th scope="row">Select the category</th>   
             <td>
                 <?php 
-                $args = array( 'hide_empty' => 0 ); 
+                $args = array( 'hide_empty' => 0,'hierarchical' => 0 ); 
                 $categories = get_categories($args); ?>
                 <select name="new_media_cat">
                     <option style="font-weight:bold;" value="<?php echo get_option('new_media_cat'); ?>">
